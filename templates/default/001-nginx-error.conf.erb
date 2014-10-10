@@ -1,0 +1,8 @@
+<source>
+  type tail
+  format /^(?<time>[^ ]+ [^ ]+) \\[(?<log_level>.*)\\] (?<pid>\\d*).(?<tid>[^:]*): (?<message>.*)$/
+  tag "<%= @server_id %>.nginx.error"
+  path /var/log/nx/nginx.nbact.error.log
+</source>
+
+
