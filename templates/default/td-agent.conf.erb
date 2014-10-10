@@ -2,7 +2,7 @@
 include conf.d/*.conf
 
 
-<match local.** aws.**>
+<match **>
   type influxdb
   dbname test
   flush_interval 10s # for testing.
