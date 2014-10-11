@@ -32,10 +32,13 @@ service "td-agent" do
   action :nothing
 end
 
+influxdb_host = node[:fluentd][:influxdb_host] || "127.0.0.1"
+
 template "/etc/td-agent/td-agent.conf" do
   mode 0644
   owner "root"
   group "root"
+  variables({ :infuxdb_host => influxdb_host })
   source "td-agent.conf.erb"
   notifies :restart, 'service[td-agent]', :delayed
 end

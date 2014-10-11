@@ -6,6 +6,6 @@ include conf.d/*.conf
   type influxdb
   dbname test
   flush_interval 10s # for testing.
-  host 192.168.89.221 # (localhost by default)
+  host <%= @influxdb_host %> # (localhost by default)
   port 8086 # (8086 by default)
 </match>

@@ -1,5 +1,6 @@
 
-remote_url = "http://packages.treasuredata.com/2/ubuntu/trusty/pool/contrib/t/td-agent/td-agent_2.1.0-0_amd64.deb"
+remote_url = node[:fluentd][:remote_url]
+
 remote_name = ::File.basename(remote_url)
 
 if ! ::File.exist?("/usr/sbin/td-agent")
