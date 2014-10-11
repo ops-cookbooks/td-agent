@@ -15,4 +15,9 @@ end
 
 
 
+# install td-agent plugin
 
+bash 'install td-agent influxdb plugin' do
+  cwd "/tmp"
+  code "td-agent-gem install fluent-plugin-influxdb"
+end
