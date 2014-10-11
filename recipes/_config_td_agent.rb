@@ -29,7 +29,7 @@ end
 
 service "td-agent" do
   supports :status => true, :restart => true, :reload => true
-  action :nothing
+  action [ :enable, :nothing ]
 end
 
 influxdb_host = node[:fluentd][:influxdb_host] || "127.0.0.1"
