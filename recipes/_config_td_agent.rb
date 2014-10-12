@@ -3,7 +3,7 @@ directory "/etc/td-agent/conf.d" do
   action :create
 end
 
-configs = %w(001-nginx-error.conf 002-syslog.conf)
+configs = %w(001-nginx-error.conf 001-nginx-access.conf 002-syslog.conf)
 
 # td-agent 
 #
