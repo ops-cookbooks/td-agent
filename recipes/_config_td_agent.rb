@@ -38,7 +38,7 @@ template "/etc/td-agent/td-agent.conf" do
   mode 0644
   owner "root"
   group "root"
-  variables({ :infuxdb_host => influxdb_host })
+  variables({ :influxdb_host => influxdb_host })
   source "td-agent.conf.erb"
   notifies :restart, 'service[td-agent]', :delayed
 end
