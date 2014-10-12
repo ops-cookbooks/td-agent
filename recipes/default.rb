@@ -9,4 +9,6 @@
 
 include_recipe "td-agent::_install_td_agent"
 
+include_recipe "td-agent::_config_rsyslog"
+
 include_recipe "td-agent::_config_td_agent"

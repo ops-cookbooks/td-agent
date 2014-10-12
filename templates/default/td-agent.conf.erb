@@ -1,11 +1,13 @@
 
-include conf.d/*.conf
+@include conf.d/*.conf
 
 
 <match {local,aws}.**>
   type influxdb
-  dbname test
+  dbname <%= @influxdb[:dbname] %>
   flush_interval 10s # for testing.
-  host <%= @influxdb_host %> # (localhost by default)
+  host <%= @influxdb[:host] %> # (localhost by default)
   port 8086 # (8086 by default)
+  user <%= @influxdb[:user] %>
+  password <%= @influxdb[:password] %>
 </match>
