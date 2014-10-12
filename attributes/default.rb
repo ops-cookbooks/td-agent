@@ -7,3 +7,13 @@ default[:td_agent][:influxdb] = {
   :password => 'root',
   :dbname => 'test'
 }
+
+#default[:td_agent][:type_nginx_access] = {
+#  :default => "/var/log/nginx/access.log",
+#  :nbact => "/var/log/nx/nginx.nbact.access.log"
+#}
+#
+#default[:td_agent][:type_nginx_error] = {
+#  :default => "/var/log/nginx/error.log",
+#  :nbact => "/var/log/nx/nginx.nbact.error.log"
+#}
