@@ -1,5 +1,5 @@
 
-remote_url = node[:fluentd][:remote_url]
+remote_url = node[:td_agent][:remote_url]
 
 remote_name = ::File.basename(remote_url)
 

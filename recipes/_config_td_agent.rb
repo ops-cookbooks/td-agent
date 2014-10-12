@@ -32,7 +32,7 @@ service "td-agent" do
   action [ :enable, :nothing ]
 end
 
-influxdb_host = node[:fluentd][:influxdb_host] || "127.0.0.1"
+influxdb_host = node[:td_agent][:influxdb_host] || "127.0.0.1"
 
 template "/etc/td-agent/td-agent.conf" do
   mode 0644
