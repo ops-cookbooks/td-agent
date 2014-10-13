@@ -23,10 +23,11 @@ template "/etc/td-agent/td-agent.conf" do
   notifies :restart, 'service[td-agent]', :delayed
 end
 
+project_name = node[:td_agent][:project]
 if node['ec2']
-  server_id = "aws.ec2.#{node['hostname']}.#{node['ec2']['instance_id']}"
+  server_id = "aws.ec2.#{project_name}.#{node['hostname']}.#{node['ec2']['instance_id']}"
 else
-  server_id = "local.#{node['hostname']}"
+  server_id = "local.#{project_name}.#{node['hostname']}"
 end
 
 #log type: nginx_access
