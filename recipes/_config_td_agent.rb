@@ -3,8 +3,6 @@ directory "/etc/td-agent/conf.d" do
   action :create
 end
 
-configs = %w(001-nginx-error.conf 001-nginx-access.conf 002-syslog.conf)
-
 # td-agent 
 #
 
@@ -31,13 +29,40 @@ else
   server_id = "local.#{node['hostname']}"
 end
 
-configs.each do |conf|
-  template "/etc/td-agent/conf.d/#{conf}" do
+#log type: nginx_access
+
+nginx_access = node[:td_agent][:type_nginx_access]
+
+nginx_access.each do |name, log|
+  template "/etc/td-agent/conf.d/001-nginx-access.conf" do
     mode 0644
     owner "root"
     group "root"
-    variables({ :server_id => server_id })
-    source "#{conf}.erb"
-    notifies :restart, 'service[td-agent]', :delayed
+    variables({ :server_id => server_id, :log_path => log, :log_name => ::File.basename(log) })
+    source "001-nginx-access.conf.erb"
   end
+end
+
+# log type: nginx_error
+
+nginx_error = node[:td_agent][:type_nginx_error]
+
+nginx_error.each do |name, log|
+  template "/etc/td-agent/conf.d/001-nginx-error.conf" do
+    mode 0644
+    owner "root"
+    group "root"
+    variables({ :server_id => server_id, :log_path => log, :log_name => ::File.basename(log) })
+    source "001-nginx-error.conf.erb"
+  end
+end
+
+# log type: rsyslog
+
+template "/etc/td-agent/conf.d/002-syslog.conf" do
+  mode 0644
+  owner "root"
+  group "root"
+  variables({ :server_id => server_id })
+  source "002-syslog.conf.erb"
 end

@@ -2,7 +2,8 @@
   type tail
   format json
   tag <%= @server_id %>.nginx.access
-  path /var/log/nx/nginx.nbact.access.log
+  path <%= @log_path %>
+  pos_file /tmp/<%= @log_name %>.pos
   time_key timestamp
 </source>
 
