@@ -23,11 +23,10 @@ template "/etc/td-agent/td-agent.conf" do
   notifies :restart, 'service[td-agent]', :delayed
 end
 
-project_name = node[:td_agent][:project]
 if node['ec2']
-  server_id = "aws.ec2.#{project_name}.#{node['hostname']}.#{node['ec2']['instance_id']}"
+  server_id = "aws.ec2.#{node['hostname']}.#{node['ec2']['instance_id']}"
 else
-  server_id = "local.#{project_name}.#{node['hostname']}"
+  server_id = "local.#{node['hostname']}"
 end
 
 #log type: nginx_access
@@ -41,6 +40,7 @@ nginx_access.each do |name, log|
     group "root"
     variables({ :server_id => server_id, :log_path => log, :log_name => ::File.basename(log) })
     source "001-nginx-access.conf.erb"
+    notifies :restart, 'service[td-agent]', :delayed
   end
 end
 
@@ -55,6 +55,7 @@ nginx_error.each do |name, log|
     group "root"
     variables({ :server_id => server_id, :log_path => log, :log_name => ::File.basename(log) })
     source "001-nginx-error.conf.erb"
+    notifies :restart, 'service[td-agent]', :delayed
   end
 end
 
@@ -66,4 +67,5 @@ template "/etc/td-agent/conf.d/002-syslog.conf" do
   group "root"
   variables({ :server_id => server_id })
   source "002-syslog.conf.erb"
+  notifies :restart, 'service[td-agent]', :delayed
 end
