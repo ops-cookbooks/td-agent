@@ -26,7 +26,7 @@ template "/etc/td-agent/td-agent.conf" do
 end
 
 if node['ec2']
-  server_id = "aws.ec2.#{node['ec2']['instance_id']}"
+  server_id = "aws.ec2.#{node['hostname']}.#{node['ec2']['instance_id']}"
 else
   server_id = "local.#{node['hostname']}"
 end
