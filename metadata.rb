@@ -6,3 +6,5 @@ description      'Installs/Configures td-agent'
 long_description 'Installs/Configures td-agent'
 version          '0.1.0'
 
+
+depends "nxweb"

@@ -1,0 +1,18 @@
+
+server {
+
+  listen    <%= @site[:listen] %>; 
+  server_name  <%= @site[:server_name] %>; 
+  root  <%= @site[:root] %>; 
+  index index.php index.html index.htm;
+
+  access_log  <%= @site[:access_log] %>; 
+  error_log <%= @site[:error_log] %>; 
+
+  location = /favicon.ico {
+    return 204;
+    access_log     off;
+    log_not_found  off;
+  }
+
+}
