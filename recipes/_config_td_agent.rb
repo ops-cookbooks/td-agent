@@ -35,7 +35,7 @@ nginx_access = node[:td_agent][:type_nginx_access]
 
 nginx_access.each do |name, log|
   log_name = ::File.basename(log)
-  template "/etc/td-agent/conf.d/001-nginx-access-#{log_name}.conf" do
+  template "/etc/td-agent/conf.d/001-nginx-access-#{name}.conf" do
     mode 0644
     owner "root"
     group "root"
@@ -51,7 +51,7 @@ nginx_error = node[:td_agent][:type_nginx_error]
 
 nginx_error.each do |name, log|
   log_name = ::File.basename(log)
-  template "/etc/td-agent/conf.d/001-nginx-error-#{log_name}.conf" do
+  template "/etc/td-agent/conf.d/001-nginx-error-#{name}.conf" do
     mode 0644
     owner "root"
     group "root"
