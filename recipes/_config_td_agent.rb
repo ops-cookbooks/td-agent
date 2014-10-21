@@ -31,6 +31,13 @@ end
 
 #log type: nginx_access
 
+directory "/var/log/nginx" do
+  mode 0755
+  user "www-data"
+  group "adm"
+  action :create
+end
+
 nginx_access = node[:td_agent][:type_nginx_access]
 
 nginx_access.each do |name, log|
