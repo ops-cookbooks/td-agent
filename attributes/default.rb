@@ -11,6 +11,10 @@ default[:td_agent][:influxdb] = {
 #default[:td_agent][:type_nginx_access] = {}
 #default[:td_agent][:type_nginx_error] = {}
 
+default[:td_agent][:rsyslog] = false
+
+default[:td_agent][:nginx] = true
+
 default[:td_agent][:type_nginx_access] = {
   :default => "/var/log/nginx/access.log"
 }

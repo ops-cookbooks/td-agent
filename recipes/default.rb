@@ -9,6 +9,15 @@
 
 include_recipe "td-agent::_install_td_agent"
 
-include_recipe "td-agent::_config_rsyslog"
-
 include_recipe "td-agent::_config_td_agent"
+
+# for system
+if node[:td_agent][:rsyslog]
+  include_recipe "td-agent::_config_rsyslog"
+end
+
+# for web
+if node[:td_agent][:nginx]
+  include_recipe "td-agent::_config_web"
+  include_recipe "td-agent::_config_nginx"
+end

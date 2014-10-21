@@ -17,3 +17,14 @@ template "/etc/rsyslog.d/99-forward.conf" do
   notifies :restart, 'service[rsyslog]'
 end
 
+# log type: rsyslog
+
+template "/etc/td-agent/conf.d/002-syslog.conf" do
+  mode 0644
+  owner "root"
+  group "root"
+  variables({ :server_id => server_id })
+  source "002-syslog.conf.erb"
+  notifies :restart, 'service[td-agent]', :delayed
+end
+
