@@ -34,11 +34,12 @@ end
 nginx_access = node[:td_agent][:type_nginx_access]
 
 nginx_access.each do |name, log|
-  template "/etc/td-agent/conf.d/001-nginx-access.conf" do
+  log_name = ::File.basename(log)
+  template "/etc/td-agent/conf.d/001-nginx-access-#{log_name}.conf" do
     mode 0644
     owner "root"
     group "root"
-    variables({ :server_id => server_id, :log_path => log, :log_name => ::File.basename(log) })
+    variables({ :server_id => server_id, :log_path => log, :log_name => log_name })
     source "001-nginx-access.conf.erb"
     notifies :restart, 'service[td-agent]', :delayed
   end
@@ -49,11 +50,12 @@ end
 nginx_error = node[:td_agent][:type_nginx_error]
 
 nginx_error.each do |name, log|
-  template "/etc/td-agent/conf.d/001-nginx-error.conf" do
+  log_name = ::File.basename(log)
+  template "/etc/td-agent/conf.d/001-nginx-error-#{log_name}.conf" do
     mode 0644
     owner "root"
     group "root"
-    variables({ :server_id => server_id, :log_path => log, :log_name => ::File.basename(log) })
+    variables({ :server_id => server_id, :log_path => log, :log_name => log_name })
     source "001-nginx-error.conf.erb"
     notifies :restart, 'service[td-agent]', :delayed
   end

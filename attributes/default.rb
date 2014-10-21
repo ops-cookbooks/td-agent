@@ -8,13 +8,13 @@ default[:td_agent][:influxdb] = {
   :dbname => 'test'
 }
 
-default[:td_agent][:type_nginx_access] = {}
-default[:td_agent][:type_nginx_error] = {}
+#default[:td_agent][:type_nginx_access] = {}
+#default[:td_agent][:type_nginx_error] = {}
 
-#default[:td_agent][:type_nginx_access] = {
-#  :default => "/var/log/nginx/access.log",
-#}
-#
-#default[:td_agent][:type_nginx_error] = {
-#  :default => "/var/log/nginx/error.log"
-#}
+default[:td_agent][:type_nginx_access] = {
+  :default => "/var/log/nginx/access.log"
+}
+
+default[:td_agent][:type_nginx_error] = {
+  :default => "/var/log/nginx/error.log"
+}

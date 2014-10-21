@@ -1,0 +1,11 @@
+<source>
+  type cloudwatch
+  tag  <%= @server_id %>.cloudwatch.opsworks
+
+  namespace AWS/OpsWorks
+  metric_name cpu_idle
+  dimensions_name InstanceId
+  dimensions_value bdbb89b6-ec82-4740-8e93-83e8c2b56ee5
+  period 60
+  interval 60
+</source>
